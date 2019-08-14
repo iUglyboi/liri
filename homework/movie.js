@@ -10,19 +10,19 @@ const url = `http://www.omdbapi.com/?t=${movie}&apikey=${APIKEY}`;
    axios.get(url)
     .then(function (response){
         console.log('the response', response);
-        if (!response){
-            var data = JSON.parse(response)
-            var queryPull = "Title: " + data.Title + " " + 
-                            "Year: " + data.Year + " " + 
-                            "IMDB Rating: " + data.Ratings[0].Value + " " +
-                            "Rotten Tomatoes Rating: " + data.Ratings[1].Value + " " +
-                            "Origin Country: " + data.Country + " " +
-                            "Language: " + data.Language + " " +
-                            "Plot: " + data.Plot + " " +
-                            "Actors: " + data.Actors + " "
+       
+            // var data = JSON.parse(response)
+            var queryPull = "Title: " + response.data.Title + " " + 
+                            "Year: " + response.data.Year + " " + 
+                            "IMDB Rating: " + response.data.Ratings[0].Value + " " +
+                            "Rotten Tomatoes Rating: " + response.data.Ratings[1].Value + " " +
+                            "Origin Country: " + response.data.Country + " " +
+                            "Language: " + response.data.Language + " " +
+                            "Plot: " + response.data.Plot + " " +
+                            "Actors: " + response.data.Actors + " "
                             console.log(queryPull);
-                        } else{
-                            console.log("error")
-                        }
-    })
+                       
+    }).catch(function(error) {
+        console.log(error);
+      });
 }
