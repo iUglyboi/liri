@@ -9,7 +9,7 @@ module.exports = function movieSearch(movie) {
 const url = `http://www.omdbapi.com/?t=${movie}&apikey=${APIKEY}`;
    axios.get(url)
     .then(function (response){
-        console.log('the response', response);
+    
        
             // var data = JSON.parse(response)
             var queryPull = "Title: " + response.data.Title + " " + 
