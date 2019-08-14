@@ -50,7 +50,7 @@ function whatItsays(){
         yeet = infoArray[1];
         main(wild,yeet)
 
-    }
+    });
 
 
 }

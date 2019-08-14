@@ -1,12 +1,17 @@
-const movieSearched = process.argv[3];
-console.log(movieSearched);
-const request = require("request");
-module.exports = function movieSearch() {
-    var queryUrl = "http://www.omdbapi.com/?t=" + movieSearched + "&y=&plot=short&apikey=4a3f8017"
+// const movieSearched = process.argv[3];
+// console.log(movieSearched);
+const axios = require('axios')
+const APIKEY = '4a3f8017';
 
-    request(queryUrl, function (error, response, body){
-        if (!error && response.statusCode === 200){
-            var data = JSON.parse(body)
+http://www.omdbapi.com/?apikey=[yourkey]&
+
+module.exports = function movieSearch(movie) {
+const url = `http://www.omdbapi.com/?t=${movie}&apikey=${APIKEY}`;
+   axios.get(url)
+    .then(function (response){
+        console.log('the response', response);
+        if (!response){
+            var data = JSON.parse(response)
             var queryPull = "Title: " + data.Title + " " + 
                             "Year: " + data.Year + " " + 
                             "IMDB Rating: " + data.Ratings[0].Value + " " +

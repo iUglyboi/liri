@@ -1,14 +1,16 @@
-let singer = process.argv[3];
-const request = require("request");
+
+const axios = require('axios');
 const moment = require('moment');
 
-module.exports = function bands() {
-    var queryUrl = "https://rest.bandsintown.com/artists/" + singer + "/events?app_id=codingbootcamp";
-    request(queryUrl, function (error, response, body){
-        if (!error){
-            const data = JSON.parse(body);
+module.exports = function bands(band) {
+    const url = "https://rest.bandsintown.com/artists/${band}/events?app_id=codingbootcamp"
+    axios.get(url)
+    .then(function (response){
+        // console.log(response)
+        if (!response){
+            const data = JSON.parse(response);
             const event = data[0];
-            const date = moment(data.datatime).format("MMM Do YY");
+            const date = moment(data.datatime).format("MMM-Do-YY");
             const results = "Band: " + singer + " " +
                             "City: " + event.venue.city + " " +
                             "Venue: " + event.venue.name + " " + 
@@ -18,7 +20,7 @@ module.exports = function bands() {
                         
 
             } else{
-                console.log("error" + error)
+                console.log("error")
                 return
             }
     })
